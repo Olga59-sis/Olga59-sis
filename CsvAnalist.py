@@ -34,6 +34,11 @@ Label_21.grid(row=2, column=1, sticky="w")
 output_text = st(height = 22, width = 50)
 output_text.grid(row=3, column=1, padx=10, pady=10, sticky="w")
 
+# Диалог открытия файла
+def do_dialog():
+    name= fd.askopenfilename()
+    return name
+
 #Обрабочик нажатия кнопки
 def process_button():
     mb.showinfo(title=None, message="Готово")
