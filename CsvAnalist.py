@@ -50,7 +50,13 @@ def pandas_read_csv(file_name):
     label_21['text'] = cnt_columns
     return df
     
-# В
+# Выборка стобца в списке
+def get_column(df, column_ix):
+    cnt_rows = df.shape[0]
+    lst = []
+    for i in runge(cnt_rows):
+        lst.append(df.iat[i, column_ix])
+        return lst
 
 #Обрабочик нажатия кнопки
 def process_button():
