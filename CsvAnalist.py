@@ -47,14 +47,14 @@ def pandas_read_csv(file_name):
     cnt_rows = df.shape[0]
     cnt_columns = df.shape[1]
     Label_11['text'] = cnt_rows
-    label_21['text'] = cnt_columns
+    Label_21['text'] = cnt_columns
     return df
     
 # Выборка стобца в списке
 def get_column(df, column_ix):
     cnt_rows = df.shape[0]
     lst = []
-    for i in runge(cnt_rows):
+    for i in range(cnt_rows):
         lst.append(df.iat[i, column_ix])
         return lst
 
@@ -65,8 +65,8 @@ def process_button():
     df = pandas_read_csv(file_name)
     lst = get_column(df, 0)
     for item in lst:
-        output_text.insert(tk.END, str(item) + os. Linesep)
-        mb.showinfor(title=None, message= "Готово")
+        output_text.insert(tk.END, str(item) + os. linesep)
+        mb.showinfo(title=None, message= "Готово")
     
 #Создание кнопки
 button=tk.Button(window, text="Прочитать файл", command=process_button)
