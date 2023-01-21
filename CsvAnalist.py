@@ -62,9 +62,12 @@ def get_column(df, column_ix):
 def process_button():
     file_name = do_dialog()
     Label_01['text'] = file_name
-    pandas_read_csv(file_name)
-    mb.showinfo(title=None, message="Готово")
-
+    df = pandas_read_csv(file_name)
+    lst = get_column(df, 0)
+    for item in lst:
+        output_text.insert(tk.END, str(item) + os. Linesep)
+        mb.showinfor(title=None, message= "Готово")
+    
 #Создание кнопки
 button=tk.Button(window, text="Прочитать файл", command=process_button)
 button.grid(row=4, column=1)
