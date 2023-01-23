@@ -68,7 +68,23 @@ def meet_name(field):
         if s in str(field): # Нашлось!
             return True
     #Ничего не совпало
-    return False        
+    return False 
+    
+  
+# Если в этом списке многие элементы содержат имя,то пусть вернет True
+def list_meet_name(fields_list):
+    counter_total = 0
+    counte_meet = 0
+    for list_item in fields_list:
+        counter_total += 1
+        if meet_name(list_item):
+            counter_meet += 1 
+     # Конец подсчета
+        if counter_meet /counter_total > 0.1:
+         return True
+ #Не набралось нужного коллчества совпадений 
+    return False
+           
             
 
 #Обработчик нажатия кнопки
