@@ -74,7 +74,7 @@ def meet_name(field):
 # Если в этом списке многие элементы содержат имя,то пусть вернет True
 def list_meet_name(fields_list):
     counter_total = 0
-    counte_meet = 0
+    counter_meet = 0
     for list_item in fields_list:
         counter_total += 1
         if meet_name(list_item):
@@ -95,7 +95,7 @@ def process_button():
         output_text.insert(tk.END, "В списке предположительно содержится имя." + os. linesep)
     else:
         output_text.insert(tk.END, "Предположений для списка не найдено" + os. linesep)     
-    mb.showinfo(title=None, message="Готово"    
+    mb.showinfo(title=None, message="Готово")    
     
 #Создание кнопки
 button=tk.Button(window, text="Прочитать файл", command=process_button)
