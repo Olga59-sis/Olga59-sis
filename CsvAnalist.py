@@ -84,7 +84,18 @@ def list_meet_name(fields_list):
          return True
  #Не набралось нужного колличества совпадений 
     return False
-           
+    
+#Пройти все столбцы
+def check_all_colums(df):
+    colums_cnt = df.shape[1]
+    for i in range(columns_cnt): # От 0 до columns_cnt-1
+        lst - get_column(df, i)
+        if list_meet_name(lst):
+            output_text.insert(tk.END, "В столбце" + str(i+1)  
+                + "Предположтельно содержится имя." + os.linesep)
+        else:
+            output_text.insert(tk.END, "Предположений для столбца" + str(i+1)
+                + " не найдено" + os.linesep)        
 #Обработчик нажатия кнопки
 def process_button():
     file_name = do_dialog()
