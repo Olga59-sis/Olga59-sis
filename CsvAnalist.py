@@ -67,37 +67,79 @@ def meet_name(field):
     for s in checkfor:
         if s in str(field): # Нашлось!
             return True
-    #Ничего не совпало
+    # Ничего не совпало
     return False 
-    # Если в этом списке многие элементы содержат имя,то пусть вернет True
+    
+# Если в этом списке многие элементы содержат имя, пусть вернет True
 def list_meet_name(fields_list):
     counter_total = 0
     counter_meet = 0
     for list_item in fields_list:
         counter_total += 1
         if meet_name(list_item):
-            counter_meet += 1 
+            counter_meet += 1
+    
     # Конец подсчета
     ratio = counter_meet / counter_total
     if ratio  > 0.1:
         return True, ratio
- #Не набралось нужного количества совпадений 
+    #Не набралось нужного количества совпадений 
+    return False, ratio
+
+# Если в этом поле дата в формате AM/PM, пусть вернет True         
+def meet_date_am_pm(field):
+    checkfor = ['AM', 'PM']
+    for s in checkfor:
+        if s in str(field): # Нашлось!
+            return True
+    #Ничего не совпало
+    return False
+    
+# Если в этом списке многие элементы содержат дату в формате AM/PM,то пусть вернет True
+def list_meet_date_am_pm(fields_list):
+    counter_total = 0
+    counter_meet = 0
+    for list_item in fields_list:
+        counter_total += 1
+        if meet_date_am_pm(list_item):
+            counter_meet += 1 
+    # Конец подсчета
+    ratio = counter_meet / counter_total
+    if ratio  > 0.5:
+        return True, ratio
+    #Не набралось нужного количества совпадений 
     return False, ratio
     
-#Пройти все столбцы
+    
+# Пройти все столбцы
 def check_all_columns(df):
     columns_cnt = df.shape[1]
     for i in range(columns_cnt): # От 0 до columns_cnt-1
         lst = get_column(df, i)
-        result = list_meet_name(lst)
-        if result[0]:
-            output_text.insert(tk.END,"В столбце" + str(i+1)  
-                + " предположтельно содержится имя." + os.linesep)
-            output_text.insert(tk.END,"Процент совпадений " + "{:.2f}".format(result[1]*100)
-                + "%." + os.linesep)    
-        else:        
-            output_text.insert(tk.END, "Предположений для столбца" + str(i+1)
-                + " не найдено." + os.linesep)        
+       
+        # Первый критерий
+        result1 = list_meet_name(lst)
+        if result1[0]:
+            output_text.insert(tk.END,"В столбце " + str(i+1)  
+                + " предположительно содержится имя." + os.linesep)
+            output_text.insert(tk.END,"Процент совпадений " + "{:.2f}".format(result1[1]*100)
+                + "%." + os.linesep + os.linesep)  
+            continue # Все нашли, можно идти к следующему столбцу
+        
+        # Второй критерий
+        result2 = list_meet_date_am_pm(lst)
+        if result2[0]:
+            output_text.insert(tk.END,"В столбце " + str(i+1)  
+                + " предположительно содержится дата в формате AM/PM." + os.linesep)
+            output_text.insert(tk.END, "Процент совпадений " + "{:.2f}".format(result2[1]*100)
+                + "%." + os.linesep + os.linesep)
+            continue # Все нашли, можно идти к следующему столбцу    
+                    
+        #Соответствия критериям не найдено      
+            output_text.insert(tk.END, "Предположений для столбца " + str(i+1)
+                + " не найдено." + os.linesep + os.linesep) 
+            
+
 #Обработчик нажатия кнопки
 def process_button():
     file_name = do_dialog()
